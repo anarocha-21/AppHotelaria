@@ -1,21 +1,22 @@
+//Dentro do package util, criar a classe TesteConexao.java, segue código abaixo:
 package util;
-
-import java.sql.Connection;
 
 /*Classe criada apenas para testar a requisição de conexão ao banco
 de dados, de modo a verificar se o SGBD MySQl está rodando na porta 3306,
 se os parâmetros como endereço IP do servidor, nome de usuário,
 senha e nome do banco de dados estão corretos, utilizando-se
 o driver JDBC para MySQL*/
+
+import java.sql.Connection;
 public class TesteConexaoDB {
     public static void main(String[] args) {
         Conexao conexao = new Conexao();
         Connection condb = conexao.conectar();
         if (condb != null) {
-            System.out.println("Conexao estabelecida com sucesso");
+            System.out.println("Conexão estabelcida com sucesso!");
             try {
                 condb.close();
-                System.out.println("Conexão encerrada");
+                System.out.println("Conexão encerrada!");
             } catch (Exception erro) {
                 System.out.println("Erro ao encerrar a conexão: " + erro.getMessage());
             }
@@ -23,14 +24,4 @@ public class TesteConexaoDB {
             System.out.println("Falha ao conectar ao banco de dados!");
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

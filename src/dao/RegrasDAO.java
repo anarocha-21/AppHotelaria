@@ -1,6 +1,7 @@
 package dao;
 
 import util.Conexao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -19,12 +20,43 @@ public class RegrasDAO {
             int linhaAfetada = novoRegras.executeUpdate();
             return linhaAfetada > 0;
 
-        }catch (Exception erro) {
+        } catch (Exception erro) {
             System.out.println("Erro ao inserir cargo: " + erro);
             return false;
         }
     }
+
+    public boolean alterarRegras() {
+        try {
+            Connection conndb = conexao.conectar();
+            PreparedStatement regraAlterada = conndb.prepareStatement("UPDATE cargos SET nome = ? WHERE id = ?; ");
+            regraAlterada.setString(1, "");
+
+            int linhaAfetada = regraAlterada.executeUpdate();
+            conndb.close();
+            return linhaAfetada > 0;
+        } catch (Exception erro) {
+            System.out.println("Erro ao alterar cargo: " + erro);
+            return false;
+        }
+    }
+
+    public boolean removerRegras() {
+        try {
+            Connection conndb = conexao.conectar();
+            PreparedStatement removeRegras = conndb.prepareStatement
+                    ("DELETE FROM regras WHERE id = ?;");
+            removeRegras.setInt(1, 1);
+            int linhaAfetada = removeRegras.executeUpdate();
+            conndb.close();
+            return linhaAfetada > 0;
+        } catch (Exception erro) {
+            System.out.println("Erro ao remover regras: " + erro);
+            return false;
+        }
+    }
 }
+
 
 
 

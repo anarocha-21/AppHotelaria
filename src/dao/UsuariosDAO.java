@@ -5,6 +5,7 @@ import util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class UsuariosDAO {
     //objeto para instanciar classe Conexao para requisitar acesso ao DB
@@ -64,6 +65,25 @@ public class UsuariosDAO {
         } catch (Exception erro) {
             System.out.println("Erro ao remover usuario: " + erro);
             return false;
+        }
+    }
+
+    public void pesquisarUsuario() {
+        try {
+            Connection conndb = conexao.conectar();
+            PreparedStatement buscarUsuario = conndb.prepareStatement("SELECT nome, email FROM usuarios WHERE fk_regras = ?");
+            buscarUsuario.setInt(1, 1);
+            ResultSet resultado = buscarUsuario.executeQuery();
+
+            while (resultado.next()) {
+                String nome = resultado.getString("nome");
+                String email = resultado.getString("email");
+                System.out.println("nome: " + nome + " - email: " + email);
+            }
+            conndb.close();
+        }
+        catch (Exception erro) {
+            System.out.println("Erro ao pesquisar usuario: " + erro);
         }
     }
 }

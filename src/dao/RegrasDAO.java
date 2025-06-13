@@ -4,6 +4,7 @@ import util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class RegrasDAO {
     private Conexao conexao = new Conexao();
@@ -53,6 +54,24 @@ public class RegrasDAO {
         } catch (Exception erro) {
             System.out.println("Erro ao remover regras: " + erro);
             return false;
+        }
+    }
+
+    public void pesquisarCargos() {
+        try {
+            Connection conndb = conexao.conectar();
+            PreparedStatement buscarCargos = conndb.prepareStatement("SELECT nome FROM regras WHERE id = ?");
+            buscarCargos.setInt(1, 1);
+            ResultSet resultado = buscarCargos.executeQuery();
+
+            while (resultado.next()) {
+                String nome = resultado.getString("nome");
+                System.out.println("nome: " + nome);
+            }
+            conndb.close();
+        }
+        catch (Exception erro) {
+            System.out.println("Erro ao pesquisar cargo: " + erro);
         }
     }
 }

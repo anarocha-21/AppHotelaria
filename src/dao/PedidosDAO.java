@@ -4,6 +4,7 @@ import util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class PedidosDAO {
     private Conexao conexao = new Conexao();
@@ -56,6 +57,26 @@ public class PedidosDAO {
         } catch (Exception erro) {
             System.out.println("Erro ao remover pedidos: " + erro);
             return false;
+        }
+    }
+
+    public void pesquisarPedidos() {
+        try {
+            Connection conndb = conexao.conectar();
+            PreparedStatement buscarPedidos = conndb.prepareStatement("SELECT fk_usuarios, fk_clientes, pagamento FROM pedidos WHERE id = ?");
+            buscarPedidos.setInt(1, 1);
+            ResultSet resultado = buscarPedidos.executeQuery();
+
+            while (resultado.next()) {
+                int fk_usuarios = resultado.getInt("fk_usuarios");
+                int fk_clientes = resultado.getInt("fk_clientes");
+                int pagamento = resultado.getInt("pagamento");
+                System.out.println("id usuario: " + fk_usuarios + " - id clientes: " + fk_clientes + " - pagamento: " + pagamento);
+            }
+            conndb.close();
+        }
+        catch (Exception erro) {
+            System.out.println("Erro ao pesquisar pedido: " + erro);
         }
     }
 }

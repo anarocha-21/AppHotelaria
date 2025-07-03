@@ -5,7 +5,7 @@ public class Usuario extends Pessoa{
     private int idUsuario, role_id;
     private String senha;
 
-    public Usuario(String nome, String email, String senha){
+    public Usuario(String nome, String email, String senha, int role_id) {
         super(nome, email);
         this.role_id = role_id;
         this.senha = senha;

@@ -1,5 +1,6 @@
 package view;
 
+import controller.UsuarioController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Usuario;
 
 import javax.swing.*;
 
@@ -49,6 +51,7 @@ public class Login extends Application {
                 "-fx-alignment: center;" +
                 "-fx-cursor: hand;";
 
+
         btnLogin.setStyle(styleButton);
         btnLogin.setOnMouseEntered(evento -> btnLogin.setStyle(styleButton.replace("transparent", "#D6C388FF")));
         btnLogin.setOnMouseExited(evento -> btnLogin.setStyle(styleButton));
@@ -64,6 +67,19 @@ public class Login extends Application {
         Label lblSenha = new Label("Senha: ");
         TextField txtSenha = new TextField();
         txtSenha.setPromptText("Senha");
+
+        btnLogin.setOnAction(evento -> {
+            String usuario = txtEmail.getText();
+            String senha = txtSenha.isVisible() ? txtSenha.getText() : "";
+            UsuarioController usuarioController = new UsuarioController();
+            boolean loginSucesso = usuarioController.verificarCredenciais(usuario, senha);
+            if (loginSucesso) {
+                System.out.println("Login efetuado com sucesso");
+                //codigo para abrir a proxima janela
+            }else {
+                System.out.println("Login invalido");
+            }
+        });
 
         GridPane formGrid = new GridPane();
         formGrid.add(lblEmail, 0, 0);

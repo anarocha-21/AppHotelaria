@@ -31,7 +31,7 @@ public class ClientesDAO {
         }
     }
 
-    public boolean alterarClientes() {
+    public boolean alterarCliente() {
         try {
             Connection conndb = conexao.conectar();
             PreparedStatement clientesAlterado = conndb.prepareStatement("UPDATE clientes"
@@ -50,7 +50,7 @@ public class ClientesDAO {
         }
     }
 
-    public boolean removerClientes() {
+    public boolean removerCliente() {
         try {
             Connection conndb = conexao.conectar();
             PreparedStatement removeClientes = conndb.prepareStatement
@@ -65,7 +65,7 @@ public class ClientesDAO {
         }
     }
 
-    public void pesquisarClientes() {
+    public void pesquisarCliente() {
         try {
             Connection conndb = conexao.conectar();
             PreparedStatement buscarClientes = conndb.prepareStatement("SELECT nome, telefone, cpf, email FROM clientes WHERE id = ?");
@@ -74,6 +74,7 @@ public class ClientesDAO {
 
             while (resultado.next()) {
                 String nome = resultado.getString("nome");
+
                 String telefone = resultado.getString("telefone");
                 String cpf = resultado.getString("cpf");
                 String email = resultado.getString("email");

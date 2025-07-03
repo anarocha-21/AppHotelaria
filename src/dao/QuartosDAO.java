@@ -32,7 +32,7 @@ public class QuartosDAO {
         }
     }
 
-    public boolean alterarQuartos() {
+    public boolean alterarQuarto() {
         try {
             Connection conndb = conexao.conectar();
             PreparedStatement quartoAlterado = conndb.prepareStatement("UPDATE quartos"
@@ -53,7 +53,7 @@ public class QuartosDAO {
         }
     }
 
-    public boolean removerQuartos() {
+    public boolean removerQuarto() {
         try {
             Connection conndb = conexao.conectar();
             PreparedStatement removeQuartos = conndb.prepareStatement
@@ -68,7 +68,7 @@ public class QuartosDAO {
         }
     }
 
-    public void pesquisarQuartos() {
+    public void pesquisarQuarto() {
         try {
             Connection conndb = conexao.conectar();
             PreparedStatement buscarQuartos = conndb.prepareStatement("SELECT nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco, disponivel FROM quartos WHERE id = ?");
